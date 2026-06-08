@@ -266,9 +266,9 @@ body[data-mode="lava-lamp"].look-screen .capture-tint {
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(0.92);
   background:
-    radial-gradient(circle at center, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 34%),
-    radial-gradient(circle at center, var(--accent), transparent 42%),
-    conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+    radial-gradient(circle at 38% 58%, var(--accent), transparent 45%),
+    radial-gradient(circle at 64% 42%, var(--accent-2), transparent 42%),
+    radial-gradient(circle at 46% 34%, var(--accent-3), transparent 52%);
   filter: blur(42px);
   opacity: 0.46;
   transition:

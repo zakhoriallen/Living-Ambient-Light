@@ -1252,28 +1252,37 @@ async function applyLookTheme() {
 
 function drawLivingBreath(width, height, loudness, bass, treble) {
   const now = performance.now();
-  const centerX = width * 0.5;
-  const centerY = height * 0.52;
-  const baseRadius = Math.min(width, height) * 0.24;
+  const minSize = Math.min(width, height);
   const breath = 0.5 + 0.5 * Math.sin(now / 1900);
   const easedBreath = breath * breath * (3 - 2 * breath);
-  const pulse = easedBreath * 0.15 + bass * 0.16 + loudness * 0.08;
+  const pulse = easedBreath * 0.12 + bass * 0.14 + loudness * 0.08;
   const shimmer = treble * 0.035;
-  const radius = baseRadius * (0.9 + pulse);
-  const haloRadius = radius * (2.25 + shimmer);
-  const orbGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, haloRadius);
+  const wash = ctx.createLinearGradient(width * 0.22, height * 0.16, width * 0.78, height * 0.86);
 
-  orbGradient.addColorStop(0, colorToRgb(themePalette.primary, 0.38 + loudness * 0.08));
-  orbGradient.addColorStop(0.24, colorToRgb(themePalette.primary, 0.32));
-  orbGradient.addColorStop(0.52, colorToRgb(themePalette.secondary, 0.2 + shimmer));
-  orbGradient.addColorStop(0.78, colorToRgb(themePalette.tertiary, 0.11));
-  orbGradient.addColorStop(1, colorToRgb(themePalette.tertiary, 0));
+  wash.addColorStop(0, colorToRgb(themePalette.tertiary, 0.08));
+  wash.addColorStop(0.44, colorToRgb(themePalette.primary, 0.14 + pulse * 0.16));
+  wash.addColorStop(0.72, colorToRgb(themePalette.secondary, 0.1 + shimmer));
+  wash.addColorStop(1, colorToRgb(themePalette.tertiary, 0.04));
+  ctx.fillStyle = wash;
+  ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = orbGradient;
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, haloRadius, 0, Math.PI * 2);
-  ctx.fill();
+  const fields = [
+    { color: themePalette.primary, x: 0.42, y: 0.6, radius: 0.46, alpha: 0.24 + pulse * 0.18 },
+    { color: themePalette.secondary, x: 0.64, y: 0.42, radius: 0.42, alpha: 0.16 + shimmer },
+    { color: themePalette.tertiary, x: 0.32, y: 0.38, radius: 0.5, alpha: 0.12 + bass * 0.05 }
+  ];
 
+  for (const field of fields) {
+    const x = width * field.x + Math.sin(now / 4800 + field.x * 6) * minSize * 0.025;
+    const y = height * field.y + Math.cos(now / 5400 + field.y * 6) * minSize * 0.025;
+    const radius = minSize * field.radius;
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    gradient.addColorStop(0, colorToRgb(field.color, field.alpha));
+    gradient.addColorStop(0.55, colorToRgb(field.color, field.alpha * 0.34));
+    gradient.addColorStop(1, colorToRgb(field.color, 0));
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+  }
 }
 
 function drawLavaLamp(width, height, loudness, bass, treble) {
