@@ -1,0 +1,39 @@
+{
+  "name": "living-ambient-light",
+  "version": "0.1.0",
+  "author": "Allen",
+  "description": "Screen-aware, audio-reactive living ambient lighting system.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.allen.livingambientlight",
+    "productName": "Living Ambient Light",
+    "files": [
+      "main.js",
+      "preload.js",
+      "scripts/**/*",
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        "portable"
+      ],
+      "icon": "build/icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12",
+    "png-to-ico": "^3.0.1",
+    "sharp": "^0.34.5"
+  },
+  "dependencies": {
+    "openrgb": "^0.1.2"
+  }
+}

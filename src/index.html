@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Living Ambient Light</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div>
+              <h1>Living Ambient Light</h1>
+          </div>
+        </div>
+
+        <div class="controls top-controls">
+          <label class="look-control" for="lookSelect">
+            <span>Style</span>
+            <select id="lookSelect">
+              <option value="screen">Live Screen</option>
+              <option value="vinyl">Vinyl Record</option>
+              <option value="sun">Sun</option>
+              <option value="moon">Moon</option>
+            </select>
+          </label>
+          <label class="look-control" for="displaySelect">
+            <span>Display</span>
+            <select id="displaySelect"></select>
+          </label>
+          <label class="look-control" for="windowModeSelect">
+            <span>Window</span>
+            <select id="windowModeSelect">
+              <option value="fullscreen">Fullscreen</option>
+              <option value="windowed">Windowed</option>
+            </select>
+          </label>
+          <button id="startBtn" class="primary">Restart Visualizer</button>
+          <button id="stopBtn" class="secondary" disabled>Stop</button>
+          <button id="exitBtn" class="secondary">Exit</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="mode-panel">
+          <div class="mode-tabs" role="tablist" aria-label="Visualizer modes">
+            <button class="mode-tab" data-mode="living-breath" type="button">Living Breath</button>
+            <button class="mode-tab" data-mode="lava-lamp" type="button">Lava Lamp</button>
+            <button class="mode-tab" data-mode="audio-orb" type="button">Audio Orb</button>
+            <button class="mode-tab" data-mode="diagnostic-meter" type="button">Diagnostic Meter</button>
+            <button class="mode-tab" data-mode="calibration" type="button">Calibration</button>
+          </div>
+          <div class="capture-debug">
+            <video id="capturePreview" class="capture-preview" muted playsinline></video>
+            <div class="capture-debug-body">
+              <span id="captureDebugText">Capture pending</span>
+              <div class="palette-swatches" aria-label="Captured palette">
+                <span id="paletteSwatchPrimary"></span>
+                <span id="paletteSwatchSecondary"></span>
+                <span id="paletteSwatchTertiary"></span>
+              </div>
+              <span id="paletteDebugText" class="palette-debug-text">Palette pending</span>
+            </div>
+          </div>
+          <div class="esp32-setup">
+            <strong id="esp32StatusText">ESP32: Checking...</strong>
+            <p id="esp32SetupText">Make sure the ESP32 is powered on, flashed with the firmware, and connected to the same Wi-Fi network as this PC.</p>
+            <label class="manual-ip-control" for="esp32HostInput">
+              <span>Manual IP</span>
+              <input id="esp32HostInput" type="text" inputmode="numeric" spellcheck="false" />
+            </label>
+            <div class="esp32-actions">
+              <button id="findLedBtn" class="secondary" type="button">Find LEDs</button>
+              <button id="testLedBtn" class="secondary" type="button">Test LEDs</button>
+              <button id="saveIpBtn" class="secondary" type="button">Save IP</button>
+              <button id="forgetIpBtn" class="secondary" type="button">Forget IP</button>
+            </div>
+            <button id="retryDiscoveryBtn" class="secondary" type="button">Retry Discovery</button>
+            <button id="manualIpBtn" class="secondary" type="button">Use Manual IP</button>
+          </div>
+        </aside>
+
+        <section class="visual-stage">
+          <div class="visual-card">
+            <video id="captureBackdrop" class="capture-backdrop" muted playsinline></video>
+            <div class="capture-tint"></div>
+            <div id="glowRing" class="glow-ring"></div>
+            <canvas id="spectrumCanvas"></canvas>
+            <div class="meter-row">
+              <div class="meter">
+                <span>Volume</span>
+                <strong id="volumeValue">0%</strong>
+              </div>
+              <div class="meter">
+                <span>Bass</span>
+                <strong id="bassValue">0%</strong>
+              </div>
+              <div class="meter">
+                <span>Treble</span>
+                <strong id="trebleValue">0%</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>
