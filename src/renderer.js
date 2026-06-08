@@ -1274,10 +1274,6 @@ function drawLivingBreath(width, height, loudness, bass, treble) {
   ctx.arc(centerX, centerY, haloRadius, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.fillStyle = colorToRgb(themePalette.secondary, 0.025 + shimmer * 0.55);
-  ctx.beginPath();
-  ctx.arc(centerX + radius * 0.18, centerY - radius * 0.16, radius * (0.46 + shimmer), 0, Math.PI * 2);
-  ctx.fill();
 }
 
 function drawLavaLamp(width, height, loudness, bass, treble) {
