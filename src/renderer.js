@@ -1261,11 +1261,11 @@ function drawLivingBreath(width, height, loudness, bass, treble) {
   const shimmer = treble * 0.035;
   const radius = baseRadius * (0.9 + pulse);
   const haloRadius = radius * (2.25 + shimmer);
-  const orbGradient = ctx.createRadialGradient(centerX, centerY, radius * 0.05, centerX, centerY, haloRadius);
+  const orbGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, haloRadius);
 
-  orbGradient.addColorStop(0, colorToRgb(themePalette.primary, 0.95));
-  orbGradient.addColorStop(0.2, colorToRgb(themePalette.primary, 0.44));
-  orbGradient.addColorStop(0.48, colorToRgb(themePalette.secondary, 0.22 + shimmer));
+  orbGradient.addColorStop(0, colorToRgb(themePalette.primary, 0.38 + loudness * 0.08));
+  orbGradient.addColorStop(0.24, colorToRgb(themePalette.primary, 0.32));
+  orbGradient.addColorStop(0.52, colorToRgb(themePalette.secondary, 0.2 + shimmer));
   orbGradient.addColorStop(0.78, colorToRgb(themePalette.tertiary, 0.11));
   orbGradient.addColorStop(1, colorToRgb(themePalette.tertiary, 0));
 
@@ -1274,9 +1274,9 @@ function drawLivingBreath(width, height, loudness, bass, treble) {
   ctx.arc(centerX, centerY, haloRadius, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.fillStyle = colorToRgb(themePalette.secondary, 0.055 + shimmer);
+  ctx.fillStyle = colorToRgb(themePalette.secondary, 0.025 + shimmer * 0.55);
   ctx.beginPath();
-  ctx.arc(centerX + radius * 0.18, centerY - radius * 0.16, radius * (0.38 + shimmer), 0, Math.PI * 2);
+  ctx.arc(centerX + radius * 0.18, centerY - radius * 0.16, radius * (0.46 + shimmer), 0, Math.PI * 2);
   ctx.fill();
 }
 
