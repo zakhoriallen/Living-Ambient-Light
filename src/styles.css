@@ -276,6 +276,10 @@ body[data-mode="lava-lamp"].look-screen .capture-tint {
     opacity 80ms linear;
 }
 
+body[data-mode="living-breath"] .glow-ring {
+  display: none;
+}
+
 body[data-mode="diagnostic-meter"] .glow-ring {
   display: none;
   inset: 12% auto auto 50%;

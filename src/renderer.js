@@ -1252,7 +1252,6 @@ async function applyLookTheme() {
 
 function drawLivingBreath(width, height, loudness, bass, treble) {
   const now = performance.now();
-  const minSize = Math.min(width, height);
   const breath = 0.5 + 0.5 * Math.sin(now / 1900);
   const easedBreath = breath * breath * (3 - 2 * breath);
   const pulse = easedBreath * 0.12 + bass * 0.14 + loudness * 0.08;
@@ -1266,23 +1265,6 @@ function drawLivingBreath(width, height, loudness, bass, treble) {
   ctx.fillStyle = wash;
   ctx.fillRect(0, 0, width, height);
 
-  const fields = [
-    { color: themePalette.primary, x: 0.42, y: 0.6, radius: 0.46, alpha: 0.24 + pulse * 0.18 },
-    { color: themePalette.secondary, x: 0.64, y: 0.42, radius: 0.42, alpha: 0.16 + shimmer },
-    { color: themePalette.tertiary, x: 0.32, y: 0.38, radius: 0.5, alpha: 0.12 + bass * 0.05 }
-  ];
-
-  for (const field of fields) {
-    const x = width * field.x + Math.sin(now / 4800 + field.x * 6) * minSize * 0.025;
-    const y = height * field.y + Math.cos(now / 5400 + field.y * 6) * minSize * 0.025;
-    const radius = minSize * field.radius;
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-    gradient.addColorStop(0, colorToRgb(field.color, field.alpha));
-    gradient.addColorStop(0.55, colorToRgb(field.color, field.alpha * 0.34));
-    gradient.addColorStop(1, colorToRgb(field.color, 0));
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
-  }
 }
 
 function drawLavaLamp(width, height, loudness, bass, treble) {
