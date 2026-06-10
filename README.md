@@ -8,7 +8,13 @@ Demo video coming soon.
 
 ## Screenshots
 
-Screenshots coming soon. Place final images in `screenshots/`.
+![Living Ambient Light dual-monitor color sync](screenshots/01-hero-dual-monitor-orange-sync.png)
+
+Additional screenshots:
+
+- [App close-up with purple sync](screenshots/02-app-closeup-purple-sync.png)
+- [Pink ambient scene match](screenshots/03-pink-ambient-scene-match.png)
+- [Fullscreen monitor effect](screenshots/04-monitor-effect-fullscreen.png)
 
 ## Features
 
