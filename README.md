@@ -4,7 +4,8 @@ Living Ambient Light is a Windows Electron desktop app and ESP32-based LED light
 
 ## Demo
 
-Demo video coming soon.
+- [LAL Demo](demo/LAL%20Demo.mp4)
+- [LAL Demo 2](demo/LAL%20Demo%202.mp4)
 
 ## Screenshots
 
